@@ -18,7 +18,7 @@ Belajar Wireshark
 8. ketik HTTP di pencarian Wireshark
 9. jika berhasi disitu akan muncul link yang dijalankan di browser tadi.
 
-##LAMPIRAN
+## LAMPIRAN
 Hasil Percobaan: 
 ![Hasil Percobaan](../assets/image/week1.png)
 ![Hasil Percobaan](../assets/image/week1d.png)
