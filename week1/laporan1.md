@@ -21,3 +21,4 @@ Mempelajari Wireshark
 ##LAMPIRAN
 Hasil Percobaan: 
 ![Hasil Percobaan](../assets/image/week1.png)
+![Hasil Percobaan](../assets/image/week1d.png)
