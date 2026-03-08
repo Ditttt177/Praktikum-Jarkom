@@ -1,13 +1,13 @@
-#LAPORAN PRAKTIKUM IF-04-01
+# LAPORAN PRAKTIKUM IF-04-01
 
-##TUJUAN PRAKTIKUM
-Mempelajari Wireshark
+## TUJUAN PRAAKTIKUM
+Belajar Wireshark
 
-##LANGKAH AWAL
-1. Download ISO Wireshark https://www.wireshark.org/
-2. Install sampai selesai
+## LANGKAH PENGINSTALAN
+1. Download wireshark https://www.wireshark.org/
+2. Lalu install sampai selesai penginstallan
 
-##PRAKTIK MENGGUNAKAN WIRESHARK
+## Praktik menggunakan Wireshark
 1. Buka APK yang sudah di unduh
 2. Hubungkan Perangkat ke Wifi
 3. Lalu klik bagian wifi
