@@ -39,7 +39,7 @@ Dalam percobaan ini, keterangan [TCP segment of a reassembled PDU] tidak muncul,
 **Tujuan:** Menganalisis apa yang terjadi ketika *browser* mengunduh dokumen HTML yang menyertakan objek lain (seperti gambar) yang direferensikan melalui URL dan disimpan di server yang berbeda.
 
 **Bukti *Screenshot* Wireshark:**
-> *![Masukkan Screenshot paket Wireshark untuk HTTP file4.html di sini](assets/images/3.4.png)*
+> *![Masukkan Screenshot paket Wireshark untuk HTTP file4.html di sini](assets/image/3.4.png)*
 
 **Analisis:**
 Ketika mengakses halaman dengan objek tersemat (seperti gambar logo), browser tidak mengunduh semuanya sekaligus. Browser terlebih dahulu mengambil file HTML dasar. Setelah mem-parsing file HTML itu dan menemukan referensi URL ke objek gambar, browser secara otomatis memulai permintaan HTTP GET baru khusus untuk mengambil gambar-gambar tersebut dari server.
