@@ -81,3 +81,41 @@
 | Hasil IP | `23.15.150.186` |
 | DNS Server yang dipakai | DNS lokal (dari `ipconfig`) |
 | Status jawaban | Non-authoritative (dari cache) |
+
+---
+
+### 4.2 Query NS Record (Siapa Server Resminya?)
+
+> **Gambar 2**: Hasil `nslookup -type=NS www.mit.edu`  
+> ![Query NS](assets/nsrecord.png)
+
+| Informasi | Nilai |
+|-----------|-------|
+| Domain | `www.mit.edu` |
+| Jenis Query | NS (Name Server) |
+| Hasil | Daftar server DNS resmi MIT |
+| Contoh | `dscb.akamaiedge.net` |
+
+---
+
+### 4.3 Query ke DNS Server Tertentu
+
+> **Gambar 3**: Hasil `nslookup www.aiit.or.kr 8.8.8.8`  
+> ![Query DNS](assets/nscompare.png)
+
+| Parameter | Nilai |
+|-----------|-------|
+| Domain | `www.aiit.or.kr` |
+| DNS Server yang dipakai | `8.8.8.8` (Google Public DNS) |
+| Hasil IP | `172.67.152.120`, `104.21.74.8` |
+
+---
+
+### 4.4 Query Alamat IP Server Web di Asia
+
+> **Gambar 4**: Hasil `nslookup www.nus.edu.sg`  
+> ![Query DNS](assets/nsnus.png)
+
+| Domain | Lokasi | Hasil IP | Keterangan |
+|--------|--------|----------|------------|
+| `www.nus.edu.sg` | Singapura 🇸🇬 | `45.60.35.225` | National University of Singapore |
