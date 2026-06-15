@@ -119,3 +119,76 @@
 | Domain | Lokasi | Hasil IP | Keterangan |
 |--------|--------|----------|------------|
 | `www.nus.edu.sg` | Singapura 🇸🇬 | `45.60.35.225` | National University of Singapore |
+
+**Analisis:**
+
+* Perintah `nslookup www.nus.edu.sg` digunakan untuk mengetahui alamat IP dari domain tersebut.
+* Domain **[www.nus.edu.sg](http://www.nus.edu.sg)** merupakan server web milik National University of Singapore (NUS) di Asia.
+* Hasil query menampilkan satu atau lebih alamat IP yang terasosiasi dengan domain tersebut.
+* Alamat IP inilah yang digunakan oleh client untuk mengakses server web tujuan.
+* Query ini menunjukkan proses dasar resolusi DNS dari nama domain menjadi alamat IP.
+
+---
+
+### 4.5 Query DNS Otoritatif (NS Record)
+
+> **Gambar 5**: Hasil `nslookup -type=NS www.ox.ac.uk`  
+> ![Query DNS](assets/ns.png)
+
+**Analisis:**
+
+* Perintah `nslookup -type=NS www.ox.ac.uk` digunakan untuk mengetahui server DNS otoritatif dari domain tersebut.
+* Hasil query menampilkan daftar **Name Server (NS)** yang bertanggung jawab atas domain **[www.ox.ac.uk](http://www.ox.ac.uk)**.
+* Server DNS otoritatif adalah server yang memiliki informasi resmi terkait domain tersebut.
+* Informasi ini penting untuk memahami bagaimana DNS mendistribusikan tanggung jawab pengelolaan domain.
+* Domain tersebut merupakan milik University of Oxford di Eropa.
+
+---
+
+### 4.6 Query MX Record (Server Email)
+
+> **Gambar 6**: Hasil `nslookup -type=MX yahoo.com 8.8.8.8`  
+> ![Query MX](assets/nsyahoo.png)
+
+| Mail Server | Fungsi |
+|-------------|--------|
+| `mta5.am0.yahoodns.net` | Prioritas tertinggi |
+| `mta6.am0.yahoodns.net` | Cadangan |
+| `mta7.am0.yahoodns.net` | Cadangan lagi |
+
+**Penjelasan Priority:**
+- Angka kecil = prioritas lebih tinggi
+- Email dikirim ke server priority 1 dulu
+- Kalau gagal, coba priority 5, lalu 10, dst.
+
+---
+
+### 4.7 Perintah ipconfig (Cek & Kelola Jaringan)
+
+#### 4.7.1 `ipconfig /all` — Lihat Semua Info Jaringan
+
+> **Gambar 7**: Hasil `ipconfig /all`  
+> ![Ipconfig All](assets/ipconfigall.png)
+
+| Informasi | Contoh Nilai | Kegunaan |
+|-----------|-------------|----------|
+| IPv4 Address | `192.168.1.15` | Alamat laptop di jaringan lokal |
+| Subnet Mask | `255.255.255.0` | Menentukan rentang jaringan |
+| Default Gateway | `192.168.1.1` | Alamat router / modem |
+| DNS Servers | `192.168.1.1`, `8.8.8.8` | Server yang dipakai untuk resolusi DNS |
+| Physical Address | `AA:BB:CC:DD:EE:FF` | MAC Address adapter jaringan |
+
+#### 4.7.2 `ipconfig /displaydns` — Lihat Cache DNS
+
+> **Gambar 8**: Hasil `ipconfig /displaydns`  
+> ![Display DNS](assets/ipconfig.png)
+
+| Field | Arti |
+|-------|------|
+| Record Name | Nama domain yang di-cache |
+| Record Type | Jenis record (A, AAAA, CNAME, dll) |
+| Time To Live | Berapa detik lagi cache ini kadaluarsa |
+| Data Length | Ukuran data record |
+| Section | Bagian pesan DNS (Answer, Authority, Additional) |
+
+---
