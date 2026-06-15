@@ -192,3 +192,139 @@
 | Section | Bagian pesan DNS (Answer, Authority, Additional) |
 
 ---
+
+### 4.8 Analisis DNS via Wireshark (Tanpa nslookup)
+
+> **Gambar 10-11**: Capture DNS saat akses `www.ietf.org`  
+> ![Wireshark DNS](assets/ietf.png)
+> ![Wireshark DNS Response](assets/ietf2.png)
+
+#### 4.8.1 Pertanyaan & Jawaban Analisis
+
+| No | Pertanyaan | Jawaban |
+|----|-----------|---------|
+| 1 | Pakai UDP atau TCP? | **UDP** (lebih cepat untuk query kecil) |
+| 2 | Port sumber & tujuan? | Sumber: ephemeral (misal 56839), Tujuan: **53** (DNS) |
+| 3 | IP tujuan query = DNS lokal? | ✅ Ya, sama dengan yang muncul di `ipconfig` |
+| 4 | Jenis query? | **A** (IPv4) dan **AAAA** (IPv6) |
+| 5 | Apakah query punya jawaban? | ❌ Tidak, query hanya pertanyaan |
+| 6 | Isi jawaban response? | IPv4: `104.16.45.99`, `104.16.44.99` + IPv6 addresses |
+| 7 | IP di response cocok dengan TCP SYN? | ✅ Ya, browser langsung konek ke IP tersebut |
+| 8 | Perlu query DNS tiap gambar? | ❌ Tidak, karena ada cache DNS (TTL) |
+
+### 4.9 Analisis DNS via Wireshark + nslookup
+
+> **Gambar 12-13**: Capture `nslookup www.mit.edu`  
+> ![Wireshark DNS nslookup](assets/mitedu.png)
+> ![Wireshark DNS Response nslookup](assets/mitedu2.png)
+
+#### 4.9.1 Port Tujuan dan Sumber
+
+| Jenis Paket  | Port Sumber | Port Tujuan |
+| ------------ | ----------- | ----------- |
+| DNS Query    | 54578       | 53          |
+| DNS Response | 53          | 54578       |
+
+* Port **53** digunakan oleh DNS server
+* Port **53250** adalah *ephemeral port* dari client
+
+---
+
+#### 4.9.2 Alamat IP tujuan DNS
+
+* IP tujuan DNS Query: **192.168.1.15**
+* IP tersebut merupakan **DNS server lokal** (jika sesuai dengan hasil `ipconfig`)
+
+---
+
+#### 4.9.3 Jenis Query dan Kandungan Jawaban
+
+* Tipe query: **A (IPv4 Address)**
+* Jumlah pertanyaan: 1
+* **Tidak terdapat jawaban pada query (Answer RRs = 0)**
+
+Hal ini karena query hanya berisi permintaan, sedangkan jawaban terdapat pada response.
+
+---
+
+#### 4.9.4 Isi Jawaban DNS Response
+
+| No | Type | Name | Data / IP | TTL |
+|----|------|------|-----------|-----|
+| 1 | CNAME | `www.mit.edu` | `www.mit.edu.edgekey.net` | 1800s |
+| 2 | CNAME | `www.mit.edu.edgekey.net` | `e9566.dscb.akamaiedge.net` | 60s |
+| 3 | AAAA | `e9566.dscb.akamaiedge.net` | `2001:4488:f931:19e::255e` | 20s |
+
+---
+
+### 4.10 Tracing DNS dengan Wireshark - Query ke DNS Server Spesifik
+
+> **Gambar 14-15**: Capture DNS saat akses `www.aiit.or.kr`    
+> ![Wireshark DNS ](assets/kr.png)
+> ![Wireshark DNS Response](assets/kr2.png)
+
+#### 4.10.1 Alamat IP Tujuam DNS Query
+
+* IP tujuan: **182.8.64.11**
+* DNS lokal (berdasarkan konfigurasi): **192.168.1.15**
+
+Query dikirim ke **Google Public DNS (8.8.8.8)**, bukan DNS lokal.
+
+* Kemungkinan terjadi resolusi awal untuk server **bitsy.mit.edu**
+* Atau sistem menggunakan DNS publik sebagai resolver utama
+
+---
+
+#### 4.10.2 Jenis Query DNS
+
+* Tipe: **A (IPv4 Address)**
+* Jumlah pertanyaan: 1
+* **Tidak mengandung jawaban (Answer RRs = 0)**
+
+Query hanya berisi permintaan, sedangkan jawaban terdapat pada response.
+
+---
+
+#### 4.10.3 Isi Jawaban DNS Response
+
+Jumlah jawaban: **2 record (A)**
+
+| No | Domain                                  | IP Address         | TTL       |
+| -- | --------------------------------------- | ------------------ | --------- |
+| 1  | [www.aiit.or.kr](http://www.aiit.or.kr) | **172.67.152.120** | 300 detik |
+| 2  | [www.aiit.or.kr](http://www.aiit.or.kr) | **104.21.74.8**    | 300 detik |
+
+**Analisis:**
+
+* Domain memiliki **lebih dari satu IP** → load balancing
+* IP termasuk dalam jaringan Cloudflare (CDN)
+* TTL: 300 detik (5 menit) → cache relatif singkat
+* Response bersifat **non-authoritative** (dari cache DNS)
+* Response time ±292 ms (lebih lambat dibanding DNS lokal)
+
+---
+
+#### 4.10.4 Karakteristik Tambahan
+
+* Menggunakan protokol **UDP port 53**
+* Terdapat query tambahan tipe **AAAA (IPv6)**
+* Mendukung **dual-stack network (IPv4 & IPv6)**
+
+---
+
+## 5. Kesimpulan
+
+| No | Poin Kesimpulan | Penjelasan Simpel |
+|----|----------------|-------------------|
+| 1 | DNS itu penting | Tanpa DNS, kita harus hafal angka IP tiap website |
+| 2 | nslookup itu berguna | Tool simpel buat cek "IP dari domain X apa?" |
+| 3 | DNS punya banyak jenis record | A untuk IP, NS untuk server resmi, MX untuk email, dll |
+| 4 | DNS bekerja bertingkat | Dari cache → DNS lokal → root → TLD → server asli |
+| 5 | DNS pakai UDP port 53 | Lebih cepat daripada TCP untuk query kecil |
+| 6 | Satu domain bisa punya banyak IP | Untuk load balancing dan backup (redundancy) |
+| 7 | CDN bikin DNS lebih kompleks | Domain bisa redirect ke server edge terdekat |
+| 8 | Cache DNS menghemat waktu | Hasil query disimpan sementara (TTL) agar tidak tanya ulang |
+| 9 | DNS publik vs lokal ada trade-off | Lokal cepat, publik stabil — pilih sesuai kebutuhan |
+| 10 | Wireshark bantu "lihat" DNS | Bisa intip paket query/response secara real-time |
+
+---
