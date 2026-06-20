@@ -15,10 +15,10 @@
 
 ## 1. Tujuan Praktikum
 
-# 1. Membuat aplikasi client-server UDP | Memahami implementasi socket UDP untuk komunikasi tanpa koneksi |
-# 2. Membuat aplikasi client-server TCP | Memahami implementasi socket TCP dengan mekanisme koneksi |
-# 3. Memahami perbedaan UDP dan TCP | Mengetahui karakteristik dan use case masing-masing protokol |
-# 4. Menganalisis pertukaran data | Mampu melacak alur komunikasi antara client dan server |
+### 1. Membuat aplikasi client-server UDP Memahami implementasi socket UDP untuk komunikasi tanpa koneksi 
+### 2. Membuat aplikasi client-server TCP Memahami implementasi socket TCP dengan mekanisme koneksi 
+### 3. Memahami perbedaan UDP dan TCP Mengetahui karakteristik dan use case masing-masing protokol 
+### 4. Menganalisis pertukaran data Mampu melacak alur komunikasi antara client dan server
 
 ---
 
