@@ -163,7 +163,7 @@ Hasil: 0 paket → Tidak ada retransmisi
 
 ### 3.8 Analisis Congestion Control
 
-![Stevens Graph](assets/graph2.png)
+![Stevens Graph](assets/graph2.jpeg)
 
 **Cara:** `Statistics → TCP Stream Graph → Time-Sequence-Graph (Stevens)`
 
