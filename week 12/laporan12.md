@@ -9,9 +9,9 @@
 ---
 
 ## 1. Tujuan Praktikum
-| **1.Investigasi Protokol ICMP** | • Menangkap lalu lintas data menggunakan Wireshark.<br>• Melakukan *ping* lewat Terminal/CMD.<br>• Menyaring paket dengan filter `icmp`. | • Tangkapan layar (*screenshot*) paket ICMP.<br>• Analisis struktur *header* (*Type*, *Code*, *Checksum*). |
-| **2** | **Membuat ICMP Pinger** | • Menulis skrip pinger berbasis Python.<br>• Menggunakan *raw socket* (`socket.SOCK_RAW`).<br>• Menangani respon sukses dan *Request Timed Out* (RTO). | • File kode program Python (`.py`).<br>• Hasil eksekusi program di Terminal/CMD (wajib akses *root*/*admin*). |
-| **3** | **Asistensi Tugas Besar** | • Melaporkan progress pengerjaan kelompok.<br>• Menjelaskan pembagian tugas anggota.<br>• Mendiskusikan kendala teknis dengan aslab/dosen. | • Dokumen progress/lembar kendali Tugas Besar.<br>• Nilai atau bukti persetujuan (*approval*) asistensi. |
+### **1.Investigasi Protokol ICMP** | • Menangkap lalu lintas data menggunakan Wireshark.<br> • Melakukan *ping* lewat Terminal/CMD.<br>• Menyaring paket dengan filter `icmp`. • Tangkapan layar (*screenshot*) paket ICMP.<br>• Analisis struktur *header* (*Type*, *Code*, *Checksum*).
+### **2**  **Membuat ICMP Pinger** | • Menulis skrip pinger berbasis Python.<br>• Menggunakan *raw socket* (`socket.SOCK_RAW`).<br>• Menangani respon sukses dan *Request Timed Out* (RTO). • File kode program Python (`.py`).<br>• Hasil eksekusi program di Terminal/CMD (wajib akses *root*/*admin*). 
+### **3**  **Asistensi Tugas Besar** | • Melaporkan progress pengerjaan kelompok.<br>• Menjelaskan pembagian tugas anggota.<br>• Mendiskusikan kendala teknis dengan aslab/dosen. • Dokumen progress/lembar kendali Tugas Besar.<br>• Nilai atau bukti persetujuan (*approval*) asistensi.
 
 
 ---
