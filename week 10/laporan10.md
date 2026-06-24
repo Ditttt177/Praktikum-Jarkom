@@ -29,7 +29,7 @@ Pada pengamatan terhadap aktivitas fragmentasi IP di Wireshark, fokus analisis d
 **Tujuan:** Mengamati karakteristik struktur header, format pengalamatan, dan mekanisme resolusi alamat pada Internet Protocol generasi terbaru (IPv6).
 
 **Bukti *Screenshot* Wireshark:**
-![Figure 10.3 IPv6](assets/image/ipv6.png)
+![Figure 10.3 IPv6](assets/ipv6.png)
 
 **Analisis:**
 Observasi terhadap datagram IPv6 dilakukan melalui pelacakan paket yang memuat permintaan sistem penamaan domain (DNS) berupa *Standard Query AAAA* untuk domain youtube.com. Query tipe AAAA digunakan secara spesifik untuk memetakan atau mentranslasikan nama domain menjadi alamat IP versi 6, menggantikan query tipe A yang biasa digunakan untuk pemetaan IPv4. Pada panel detail *Internet Protocol Version 6*, terlihat perbedaan fundamental pada format pengalamatan *Source Address* dan *Destination Address* yang tidak lagi menggunakan sistem desimal 32-bit, melainkan mengadopsi sistem blok heksadesimal 128-bit yang jauh lebih panjang. Struktur header IPv6 dirancang lebih ringkas namun menawarkan ruang alokasi alamat global yang jauh lebih masif guna mengantisipasi kelangkaan alamat IP di masa mendatang.
