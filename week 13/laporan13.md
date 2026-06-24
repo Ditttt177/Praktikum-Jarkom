@@ -303,33 +303,30 @@ Frame 2554: 564 bytes on wire (4512 bits), 564 bytes captured (4512 bits)
 
 ### 3.7 Analisis Traffic Pattern
 
-```mermaid
+``````mermaid
 sequenceDiagram
-    autonumber
-    actor Host21 as Host 192.168.1.21<br/>(3e:52:a1:04:9a:16)
-    actor Host1 as Host 192.168.1.1<br/>(04:20:84:d9:13:91)
-    actor Host3 as Host 192.168.1.3<br/>(9c:65:eb:15:2c:b4)
-    participant BC as Broadcast Address<br/>(ff:ff:ff:ff:ff:ff)
-    participant Target22 as Host 192.168.1.22<br/>(Unknown/Silent)
+    participant Host1 as Host 192.168.1.21<br/>3e:52:a1:04:9a:16
+    participant Host2 as Host 192.168.1.3<br/>Intel_15:2c:b4
+    participant Host6 as Host 192.168.1.1<br/>04:20:84:d9:13:91
+    participant Host67 as Host 192.168.1.22
 
-    Note over Host21,Target22: ARP Resolution & Broadcast Phase
-
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.16? Tell 192.168.1.21
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.1? Tell 192.168.1.21
-
-    Note over Host1,Host3: Unicast Reply Phase (802.1Q VLAN)
-    Host3->>Host1: ARP Reply [Opcode=2]<br/>192.168.1.3 is at 9c:65:eb:15:2c:b4
-    Host1->>Host3: ARP Reply [Opcode=2]<br/>192.168.1.1 is at 04:20:84:d9:13:91
-    Note over Host1,Host3: ARP Cache Table Updated
-
-    Note over Host21,Target22: Unanswered Broadcast (Silent Target)
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.22? Tell 192.168.1.21
-    Note over Host21: Retry Mechanism (No response from .22)
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.22? Tell 192.168.1.21
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.22? Tell 192.168.1.21
-
-    Note over Host21,BC: Subsequent Discoveries
-    Host21->>BC: ARP Request [Opcode=1]<br/>Who has 192.168.1.7? Tell 192.168.1.21
+    Note over Host1,Host67: ARP Resolution Process
+    
+    Host1->>Host67: ARP Request (Broadcast)<br/>Who has 192.168.1.22?<br/>Tell 192.168.1.21
+    
+    Note over Host1: Retry ARP Request
+    Host1->>Host67: ARP Request (Broadcast)<br/>Who has 192.168.1.22?<br/>Tell 192.168.1.21
+    
+    Host2->>Host6: ARP Reply (Unicast)<br/>192.168.1.3 is at<br/>9c:65:eb:15:2c:b4
+    
+    Host6->>Host2: ARP Reply (Unicast)<br/>192.168.1.1 is at<br/>04:20:84:d9:13:91
+    
+    Note over Host2,Host6: ARP Cache Updated
+    
+    Note over Host2,Server: HTTP Communication
+    
+    Host2->>Server: HTTP GET Request<br/>GET /wireshark-labs/HTTP-wireshark-file3.html
+    Server->>Host2: HTTP 304 N
 ```
 
 ### 3.8 Struktur Frame Ethernet
