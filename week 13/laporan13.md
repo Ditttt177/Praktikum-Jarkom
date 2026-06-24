@@ -303,7 +303,7 @@ Frame 2554: 564 bytes on wire (4512 bits), 564 bytes captured (4512 bits)
 
 ### 3.7 Analisis Traffic Pattern
 
-``````mermaid
+``` mermaid
    sequenceDiagram
     participant Host1 as Host 192.168.1.21<br/>3e:52:a1:04:9a:16
     participant Host2 as Host 192.168.1.3<br/>Intel_15:2c:b4
