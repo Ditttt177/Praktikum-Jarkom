@@ -304,7 +304,7 @@ Frame 2554: 564 bytes on wire (4512 bits), 564 bytes captured (4512 bits)
 ### 3.7 Analisis Traffic Pattern
 
 ``````mermaid
-sequenceDiagram
+   sequenceDiagram
     participant Host1 as Host 192.168.1.21<br/>3e:52:a1:04:9a:16
     participant Host2 as Host 192.168.1.3<br/>Intel_15:2c:b4
     participant Host6 as Host 192.168.1.1<br/>04:20:84:d9:13:91
@@ -317,16 +317,12 @@ sequenceDiagram
     Note over Host1: Retry ARP Request
     Host1->>Host67: ARP Request (Broadcast)<br/>Who has 192.168.1.22?<br/>Tell 192.168.1.21
     
-    Host2->>Host6: ARP Reply (Unicast)<br/>192.168.1.3 is at<br/>9c:65:eb:15:2c:b4
+    Host2->>Host6: ARP Reply (Unicast)<br/>192.168.1.3 is at 9c:65:eb:15:2c:b4
     
-    Host6->>Host2: ARP Reply (Unicast)<br/>192.168.1.1 is at<br/>04:20:84:d9:13:91
+    Host6->>Host2: ARP Reply (Unicast)<br/>192.168.1.1 is at 04:20:84:d9:13:91
     
     Note over Host2,Host6: ARP Cache Updated
-    
-    Note over Host2,Server: HTTP Communication
-    
-    Host2->>Server: HTTP GET Request<br/>GET /wireshark-labs/HTTP-wireshark-file3.html
-    Server->>Host2: HTTP 304 N
+  
 ```
 
 ### 3.8 Struktur Frame Ethernet
